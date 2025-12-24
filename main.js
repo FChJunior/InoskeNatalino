@@ -1,24 +1,23 @@
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { MindARThree } from 'mindar-image-three';
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { MindARThree } from "mindar-image-three";
 
 // UI
-const ui = document.getElementById('ui');
-const scaleSlider = document.getElementById('scaleSlider');
-const rotationSlider = document.getElementById('rotationSlider');
-const actionBtn = document.getElementById('actionBtn');
+const ui = document.getElementById("ui");
+const scaleSlider = document.getElementById("scaleSlider");
+const rotationSlider = document.getElementById("rotationSlider");
+const actionBtn = document.getElementById("actionBtn");
 
 // 🔊 Áudio HTML5 (mais simples e confiável)
-const audio = new Audio('./assets/audio.mp3');
+const audio = new Audio("./assets/audio.mp3");
 audio.loop = true;
 
 let model;
 
 async function start() {
-
   const mindarThree = new MindARThree({
     container: document.body,
-    imageTargetSrc: './assets/qrcodetarget2.mind'
+    imageTargetSrc: "./assets/qrcodetarget2.mind",
   });
 
   const { renderer, scene, camera } = mindarThree;
@@ -31,7 +30,7 @@ async function start() {
 
   // Modelo 3D
   const loader = new GLTFLoader();
-  loader.load('./assets/model.glb', (gltf) => {
+  loader.load("./assets/model.glb", (gltf) => {
     model = gltf.scene;
 
     model.scale.set(1, 1, 1);
@@ -43,40 +42,43 @@ async function start() {
 
   // 🎯 Target encontrada
   anchor.onTargetFound = () => {
-    ui.style.display = 'flex';
+    ui.style.display = "flex";
+
+    scaleSlider.value = 1;
+    rotationSlider.value = 0;
   };
 
   // ❌ Target perdida
   anchor.onTargetLost = () => {
-    ui.style.display = 'none';
+    ui.style.display = "none";
 
     // Para o áudio se a target sair
     audio.pause();
     audio.currentTime = 0;
-    actionBtn.textContent = '🎵 Tocar Música';
+    actionBtn.textContent = "🎵 Tocar Música";
   };
 
   // 🎚️ Escala
-  scaleSlider.addEventListener('input', () => {
+  scaleSlider.addEventListener("input", () => {
     if (!model) return;
     const s = parseFloat(scaleSlider.value);
     model.scale.set(s, s, s);
   });
 
   // 🎚️ Rotação Y
-  rotationSlider.addEventListener('input', () => {
+  rotationSlider.addEventListener("input", () => {
     if (!model) return;
     model.rotation.y = parseFloat(rotationSlider.value);
   });
 
   // 🔘 BOTÃO → TOCAR / PAUSAR ÁUDIO
-  actionBtn.addEventListener('click', () => {
+  actionBtn.addEventListener("click", () => {
     if (audio.paused) {
       audio.play();
-      actionBtn.textContent = '⏸️ Pausar Música';
+      actionBtn.textContent = "⏸️ Pausar Música";
     } else {
       audio.pause();
-      actionBtn.textContent = '🎵 Tocar Música';
+      actionBtn.textContent = "🎵 Tocar Música";
     }
   });
 
