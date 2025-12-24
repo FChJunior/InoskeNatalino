@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>MindAR Natalino</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Import Map -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+      "mindar-image-three": "https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- 🎄 UI Natalina -->
+  <div id="ui">
+    <h2>🎄 Feliz Natal</h2>
+
+    <button id="actionBtn">🎵 Tocar</button>
+
+    <label>
+      Escala
+      <input type="range" id="scaleSlider" min="0.5" max="2" step="0.01" value="1">
+    </label>
+
+    <label>
+      Rotação Y
+      <input type="range" id="rotationSlider" min="0" max="6.28" step="0.01" value="0">
+    </label>
+  </div>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
