@@ -18,7 +18,7 @@ async function start() {
 
   const mindarThree = new MindARThree({
     container: document.body,
-    imageTargetSrc: './assets/target.mind'
+    imageTargetSrc: './assets/qrcodetarget.mind'
   });
 
   const { renderer, scene, camera } = mindarThree;
